@@ -1,6 +1,5 @@
 package com.luoshupeng.multidatasource.configurer;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -22,7 +21,6 @@ public class DataSourceConfigurer {
      */
     @Primary
     @Bean(name = "primaryDataSourceProperties")
-    @Qualifier("primaryDataSourceProperties")
     @ConfigurationProperties(prefix = "spring.datasource.primary")
     public DataSourceProperties primaryDataSourceProperties() {
         return new DataSourceProperties();
@@ -30,7 +28,6 @@ public class DataSourceConfigurer {
 
     @Primary
     @Bean(name = "primaryDataSource")
-    @Qualifier("primaryDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.primary")
     public DataSource primaryDataSource() {
         return primaryDataSourceProperties().initializeDataSourceBuilder().build();
@@ -41,7 +38,6 @@ public class DataSourceConfigurer {
      * @return
      */
     @Bean(name = "secondaryDataSource")
-    @Qualifier("secondaryDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.secondary")
     public DataSource secondaryDataSource() {
         //return DataSourceBuilder.create().type(HikariDataSource.class).build();
